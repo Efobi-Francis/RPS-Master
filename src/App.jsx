@@ -1,4 +1,5 @@
 import { createBrowserRouter,createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
+import { ScoreProvider } from './components/ScoreContext'; // Import ScoreProvider
 
 import RootLayout from './layouts/RootLayout';
 
@@ -17,9 +18,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <div>
-      <RouterProvider router={router}/>
-    </div>
+    <ScoreProvider>
+      <div>
+        <RouterProvider router={router}/>
+      </div>
+    </ScoreProvider>
   )
 }
 

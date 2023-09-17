@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useScore } from './ScoreContext';
 import { useParams, useNavigate } from 'react-router-dom';
-
-import Win from './Win';
-import Draw from './Draw';
-import Lose from './Lose';
 
 import Button from './buttons'
 import { BUTTON_TYPES } from '../commons/data/button';
 
 const choices = [BUTTON_TYPES.SCISSORS, BUTTON_TYPES.PAPER, BUTTON_TYPES.ROCK, BUTTON_TYPES.LIZARD, BUTTON_TYPES.SPOCK]
 
-export default function GamePlay(props) {
-  const [userScore, setUserScore] = useState(0);
+export default function GamePlay() {
+  // Use the useScore hook to access score and updateScore
+  const { score, updateScore } = useScore();
+
   const [computerChoice, setComputerChoice] = useState(null)
   const [result, setResult] = useState(null);
 
@@ -28,19 +27,6 @@ export default function GamePlay(props) {
     }, 1000);
   }, []);
 
-  useEffect(() => {
-    // Calculate the winner once both choices are available
-    if (userChoice && computerChoice) {
-      const delayedResult = setTimeout(() => {
-        const result = determineWinner(userChoice, computerChoice);
-        setResult(result);
-      }, 1000);
-
-      return () => clearTimeout(delayedResult);
-    }
-  }, [userChoice, computerChoice, userScore, props]);
-
-
   const determineWinner = (userChoice, computerChoice) => {
     if (userChoice === computerChoice) return 'A DRAW!';
     if (
@@ -54,8 +40,26 @@ export default function GamePlay(props) {
     } else {
       return 'YOU LOSE';
     }
-    
   };
+
+  useEffect(() => {
+    // Calculate the winner once both choices are available
+    if (userChoice && computerChoice) {
+      const delayedResult = setTimeout(() => {
+        const result = determineWinner(userChoice, computerChoice);
+        setResult(result);
+
+        // Use the updateScore function from the context to update the score
+        if (result === 'YOU WIN') {
+          updateScore('win');
+        } else if (result === 'YOU LOSE' && score > 0) {
+          updateScore('lose');
+        }
+      }, 1000);
+
+      return () => clearTimeout(delayedResult);
+    }
+  }, [userChoice, computerChoice]);
 
   const playAgain = () => {
     navigate('/')
