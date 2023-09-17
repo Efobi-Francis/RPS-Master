@@ -8,7 +8,7 @@ import ScoreBoard from '../components/ScoreBoard'
 
 export default function RootLayout() {
     const [isClicked, setIsClicked] = useState(false)
-    const [updateScore, setUpdateScore] = useState(0);
+    const [userScore, setUserScore] = useState(12); // Initialize the user's score
 
     const handleClickOpen = (event) => {
         setIsClicked(true)
@@ -24,7 +24,7 @@ export default function RootLayout() {
                 <header className='flex justify-between items-center outline outline-4 outline-[hsl(217,16%,45%)] rounded-lg mt-10 p-2'>
                     <img src={logobonus} alt="logobonus" className='h-16 ml-5'/>
                     <div className='bg-white flex justify-center w-24 h-24 rounded-lg'>
-                        <ScoreBoard score = {updateScore}/>
+                        <ScoreBoard score = {userScore}/>
                     </div>
                 </header>
 

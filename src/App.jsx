@@ -6,13 +6,11 @@ import Select from './components/Select';
 import GamePlay from './components/GamePlay';
 import './App.css'
 
-
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout/>}>
       <Route index element={<Select/>}/>
-      <Route path='play/:userChoice' element={<GamePlay />}/>
+      <Route path='play/:userChoice' element={<GamePlay/>}/>
     </Route>
   )
 );

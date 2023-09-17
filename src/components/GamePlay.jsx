@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 
 import Win from './Win';
@@ -7,24 +7,42 @@ import Lose from './Lose';
 
 import Button from './buttons'
 import { BUTTON_TYPES } from '../commons/data/button';
-import ScoreBoard from './ScoreBoard';
 
 const choices = [BUTTON_TYPES.SCISSORS, BUTTON_TYPES.PAPER, BUTTON_TYPES.ROCK, BUTTON_TYPES.LIZARD, BUTTON_TYPES.SPOCK]
 
-export default function GamePlay() {
+export default function GamePlay(props) {
   const [userScore, setUserScore] = useState(0);
+  const [computerChoice, setComputerChoice] = useState(null)
+  const [result, setResult] = useState(null);
+
   const { userChoice } = useParams();
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
-  const randomChoice = () => {
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];
-  };
+  useEffect( function () {
+    const delayedRandomChoice = setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * choices.length);
+      const randomChoices = choices[randomIndex];
+      setComputerChoice(randomChoices) // Get the computer's choice
 
-  const computerChoice = randomChoice(); // Get the computer's choice
+      clearTimeout(delayedRandomChoice);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    // Calculate the winner once both choices are available
+    if (userChoice && computerChoice) {
+      const delayedResult = setTimeout(() => {
+        const result = determineWinner(userChoice, computerChoice);
+        setResult(result);
+      }, 1000);
+
+      return () => clearTimeout(delayedResult);
+    }
+  }, [userChoice, computerChoice, userScore, props]);
+
 
   const determineWinner = (userChoice, computerChoice) => {
-    if (userChoice === computerChoice) return <Draw/>;
+    if (userChoice === computerChoice) return 'A DRAW!';
     if (
       (userChoice === BUTTON_TYPES.ROCK && (computerChoice === BUTTON_TYPES.SCISSORS || computerChoice === BUTTON_TYPES.LIZARD)) ||
       (userChoice === BUTTON_TYPES.PAPER && (computerChoice === BUTTON_TYPES.ROCK || computerChoice === BUTTON_TYPES.SPOCK)) ||
@@ -32,16 +50,16 @@ export default function GamePlay() {
       (userChoice === BUTTON_TYPES.LIZARD && (computerChoice === BUTTON_TYPES.SPOCK || computerChoice === BUTTON_TYPES.PAPER)) ||
       (userChoice === BUTTON_TYPES.SPOCK && (computerChoice === BUTTON_TYPES.SCISSORS || computerChoice === BUTTON_TYPES.ROCK))
     ) {
-      return <Win/>;
+      return 'YOU WIN';
     } else {
-      return <Lose/>;
+      return 'YOU LOSE';
     }
     
   };
 
-  // const playAgain = () => {
-  //   navigate('/')
-  // }
+  const playAgain = () => {
+    navigate('/')
+  }
   
   const btnPosition = `m-auto w-28 h-28`
   const imgSize = `w-20 h-20`
@@ -73,8 +91,11 @@ export default function GamePlay() {
       </div>
 
       <div className='flex flex-col justify-center items-center text-center'>
-        {determineWinner(userChoice, computerChoice)}
-        <button className='bg-white text-[hsl(229,25%,31%)] rounded-lg py-4 px-20'>PLAY AGAIN</button>
+        {result ? (
+          <div>
+            <h1 className='text-5xl mb-5'>{result}</h1>
+            <button onClick={playAgain} className='bg-white text-[hsl(229,25%,31%)] rounded-lg py-4 px-20'>PLAY AGAIN</button>
+          </div>) : (<div>Thinking...</div>)}
       </div>
     </div>
   )
