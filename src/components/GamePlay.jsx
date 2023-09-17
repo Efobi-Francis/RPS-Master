@@ -1,13 +1,20 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
+
+import Win from './Win';
+import Draw from './Draw';
+import Lose from './Lose';
 
 import Button from './buttons'
 import { BUTTON_TYPES } from '../commons/data/button';
+import ScoreBoard from './ScoreBoard';
 
 const choices = [BUTTON_TYPES.SCISSORS, BUTTON_TYPES.PAPER, BUTTON_TYPES.ROCK, BUTTON_TYPES.LIZARD, BUTTON_TYPES.SPOCK]
 
 export default function GamePlay() {
+  const [userScore, setUserScore] = useState(0);
   const { userChoice } = useParams();
+  // const navigate = useNavigate()
 
   const randomChoice = () => {
     const randomIndex = Math.floor(Math.random() * choices.length);
@@ -17,7 +24,7 @@ export default function GamePlay() {
   const computerChoice = randomChoice(); // Get the computer's choice
 
   const determineWinner = (userChoice, computerChoice) => {
-    if (userChoice === computerChoice) return 'It\'s a tie!';
+    if (userChoice === computerChoice) return <Draw/>;
     if (
       (userChoice === BUTTON_TYPES.ROCK && (computerChoice === BUTTON_TYPES.SCISSORS || computerChoice === BUTTON_TYPES.LIZARD)) ||
       (userChoice === BUTTON_TYPES.PAPER && (computerChoice === BUTTON_TYPES.ROCK || computerChoice === BUTTON_TYPES.SPOCK)) ||
@@ -25,18 +32,23 @@ export default function GamePlay() {
       (userChoice === BUTTON_TYPES.LIZARD && (computerChoice === BUTTON_TYPES.SPOCK || computerChoice === BUTTON_TYPES.PAPER)) ||
       (userChoice === BUTTON_TYPES.SPOCK && (computerChoice === BUTTON_TYPES.SCISSORS || computerChoice === BUTTON_TYPES.ROCK))
     ) {
-      return 'You win!';
+      return <Win/>;
     } else {
-      return 'Computer wins!';
+      return <Lose/>;
     }
+    
   };
+
+  // const playAgain = () => {
+  //   navigate('/')
+  // }
   
   const btnPosition = `m-auto w-28 h-28`
   const imgSize = `w-20 h-20`
 
   return (
-    <div>
-      <div className='flex gap-[90px] -mt-[50%]'>
+    <div className='flex flex-col justify-between h-[45vh]'>
+      <div className='flex gap-[85px]'>
         <div className='flex flex-col items-center justify-center'>
           <div className='w-28 h-28 rounded-full bg-[hsl(237,49%,15%)]/50 mb-10 relative flex'>
             
@@ -60,8 +72,9 @@ export default function GamePlay() {
         </div>
       </div>
 
-      <div className='flex justify-center'>
+      <div className='flex flex-col justify-center items-center text-center'>
         {determineWinner(userChoice, computerChoice)}
+        <button className='bg-white text-[hsl(229,25%,31%)] rounded-lg py-4 px-20'>PLAY AGAIN</button>
       </div>
     </div>
   )

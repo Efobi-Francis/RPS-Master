@@ -4,9 +4,11 @@ import { Outlet } from 'react-router-dom'
 import logobonus from '../assets/images/logo-bonus.svg'
 import imagerules from '../assets/images/image-rules-bonus.svg'
 import iconclose from '../assets/images/icon-close.svg'
+import ScoreBoard from '../components/ScoreBoard'
 
 export default function RootLayout() {
     const [isClicked, setIsClicked] = useState(false)
+    const [updateScore, setUpdateScore] = useState(0);
 
     const handleClickOpen = (event) => {
         setIsClicked(true)
@@ -21,9 +23,8 @@ export default function RootLayout() {
             <div className=' container mx-auto flex flex-col h-screen justify-between'>
                 <header className='flex justify-between items-center outline outline-4 outline-[hsl(217,16%,45%)] rounded-lg mt-10 p-2'>
                     <img src={logobonus} alt="logobonus" className='h-16 ml-5'/>
-                    <div className='bg-white flex flex-col items-center justify-center w-24 h-24 rounded-lg'>
-                        <span className='text-[hsl(229,64%,46%)]'>SCORE</span>
-                        <span className=' text-4xl'>12</span>
+                    <div className='bg-white flex justify-center w-24 h-24 rounded-lg'>
+                        <ScoreBoard score = {updateScore}/>
                     </div>
                 </header>
 
