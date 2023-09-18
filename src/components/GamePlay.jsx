@@ -66,8 +66,8 @@ export default function GamePlay() {
   }
   
   const btnPosition = `m-auto w-32 h-32`
-  const imgBgSize = `w-[85px] h-[85px]`
-  const imgHeight = `h-12`
+  const imgBgSize = `!w-[85px] !h-[85px]`
+  const imgHeight = `!h-12`
 
   return (
     <div className='flex flex-col justify-between h-[50vh] font-Barlow'>
