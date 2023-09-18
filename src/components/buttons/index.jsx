@@ -8,7 +8,7 @@ import iconLizard from '../../assets/images/icon-lizard.svg'
 import iconSpock from '../../assets/images/icon-spock.svg'
 
 export default function Button(props) {
-  const { type, btnIcon, btnPosition_Size, btnClick } = props;
+  const { type, btnIcon, btnPosition_Size, btnClick, imgSize, imgbg_size } = props;
 
   const btnStyle = `rounded-full flex justify-center items-center shadow-[inset_0_-3px_4px_-1px_rgba(0,0,0,0.5)] cursor-pointer`;
 
@@ -37,36 +37,36 @@ export default function Button(props) {
     switch(btnIcon) {
       case BUTTON_TYPES.SCISSORS:
         return (
-          <div className='bg-white rounded-full w-16 h-16 flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]'>
-            <img src={iconScissors} alt="icon-scissors" className='h-8'/>
+          <div className={`bg-white rounded-full w-16 h-16 ${imgbg_size} flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]`}>
+            <img src={iconScissors} alt="icon-scissors" className={`h-8 ${imgSize}`}/>
           </div>
         )
 
       case BUTTON_TYPES.PAPER:
         return (
-          <div className='bg-white rounded-full w-16 h-16 flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]'>
-            <img src={iconPaper} alt="icon-paper" className='h-8'/>
+          <div className={`bg-white rounded-full w-16 h-16 ${imgbg_size} flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]`}>
+            <img src={iconPaper} alt="icon-paper" className={`h-8 ${imgSize}`}/>
           </div>
         )
 
       case BUTTON_TYPES.ROCK:
         return (
-          <div className='bg-white rounded-full w-16 h-16 flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]'>
-            <img src={iconRock} alt="icon-rock" className='h-8'/>
+          <div className={`bg-white rounded-full w-16 h-16 ${imgbg_size} flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]`}>
+            <img src={iconRock} alt="icon-rock" className={`h-8 ${imgSize}`}/>
           </div>
         )
 
       case BUTTON_TYPES.LIZARD:
         return (
-          <div className='bg-white rounded-full w-16 h-16 flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]'>
-            <img src={iconLizard} alt="icon-lizard" className='h-8'/>
+          <div className={`bg-white rounded-full w-16 h-16 ${imgbg_size} flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]`}>
+            <img src={iconLizard} alt="icon-lizard" className={`h-8 ${imgSize}`}/>
           </div>
         )
 
       case BUTTON_TYPES.SPOCK:
         return (
-          <div className='bg-white rounded-full w-16 h-16 flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]'>
-            <img src={iconSpock} alt="icon-spock" className='h-8'/>
+          <div className={`bg-white rounded-full w-16 h-16 ${imgbg_size} flex justify-center items-center shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.5)]`}>
+            <img src={iconSpock} alt="icon-spock" className={`h-8 ${imgSize}`}/>
           </div>
         )
 

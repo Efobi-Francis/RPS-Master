@@ -31,11 +31,11 @@ export default function RootLayout() {
                     <Outlet/>
                 </main>
 
-                <footer className=' flex justify-center text-white pb-20'>
-                    <button onClick={handleClickOpen} className=' border-2 border-white py-2 px-10 rounded-lg'>RULES</button>
+                <footer className=' flex justify-center text-white pb-20 font-Barlow'>
+                    <button onClick={handleClickOpen} className=' border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg'>RULES</button>
                     {isClicked && 
                         (<div className='flex flex-col items-center justify-between h-screen w-full absolute top-0 bg-white pb-24'>
-                            <h1 className='text-[hsl(229,25%,31%)] text-4xl mt-20'>RULES</h1>
+                            <h1 className='text-[hsl(229,25%,31%)] text-4xl mt-20 font-bold'>RULES</h1>
                             <img src={imagerules} alt="image-rules-bonus" />
                             <button onClick={handleClickClose}>
                                 <img src={iconclose} alt="icon-close" />
