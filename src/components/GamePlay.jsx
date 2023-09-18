@@ -65,7 +65,7 @@ export default function GamePlay() {
     navigate('/')
   }
   
-  const btnPosition = `m-auto w-32 h-32`
+  const btnPosition = `m-auto w-32 h-32 z-10`
   const imgBgSize = `!w-[85px] !h-[85px]`
   const imgHeight = `!h-12`
 
@@ -74,6 +74,15 @@ export default function GamePlay() {
       <div className='flex gap-16 tracking-widest'>
         <div className='flex flex-col items-center justify-center'>
           <div className='w-32 h-32 rounded-full bg-[hsl(237,49%,15%)]/50 mb-8 relative flex'>
+
+            {/* show overlay when user wins */}
+            {result === 'YOU WIN' && (
+              <div className=" group absolute inset-y-0 left-auto -right-[64px] m-auto w-64 h-64 bg-white/5 rounded-full flex justify-center items-center">
+                <div className=" w-56 h-56 bg-white/5 rounded-full flex justify-center items-center">
+                  <div className=" w-44 h-44 bg-white/5 rounded-full"></div>
+                </div>
+              </div>
+            )}
             
             {/* dynamic content gets button chosen from select component using useParams*/}
             <Button type={userChoice}
@@ -88,6 +97,16 @@ export default function GamePlay() {
 
         <div className='flex flex-col items-center'>
           <div className='w-32 h-32 rounded-full bg-[hsl(237,49%,15%)]/50 mb-8 relative flex'>
+
+            {/* show overlay when user loses */}
+            {result === 'YOU LOSE' && (
+              <div className=" group absolute inset-y-0 left-auto -right-[64px] m-auto w-64 h-64 bg-white/5 rounded-full flex justify-center items-center">
+                <div className=" w-56 h-56 bg-white/5 rounded-full flex justify-center items-center">
+                  <div className=" w-44 h-44 bg-white/5 rounded-full"></div>
+                </div>
+              </div>
+            )}
+
             <Button type={computerChoice}
               btnIcon={computerChoice}
               btnPosition_Size={`${btnPosition}`}
