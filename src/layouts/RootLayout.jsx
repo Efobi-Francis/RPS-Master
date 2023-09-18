@@ -34,7 +34,7 @@ export default function RootLayout() {
                 <footer className=' flex justify-center text-white pb-20 font-Barlow'>
                     <button onClick={handleClickOpen} className=' border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg'>RULES</button>
                     {isClicked && 
-                        (<div className='flex flex-col items-center justify-between h-screen w-full absolute top-0 bg-white pb-20'>
+                        (<div className='flex flex-col items-center justify-between h-screen w-full absolute top-0 bg-white pb-20 z-30'>
                             <h1 className='text-[hsl(229,25%,31%)] text-4xl mt-20 font-bold'>RULES</h1>
                             <img src={imagerules} alt="image-rules-bonus" />
                             <button onClick={handleClickClose}>
