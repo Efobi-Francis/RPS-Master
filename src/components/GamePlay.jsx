@@ -114,7 +114,7 @@ export default function GamePlay() {
               imgSize={`${imgHeight}`}
             />
           </div>
-          <span>THE HOUSE PICKED</span>
+          <span className=' whitespace-nowrap'>THE HOUSE PICKED</span>
         </div>
       </div>
 
