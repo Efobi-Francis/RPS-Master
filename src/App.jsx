@@ -16,7 +16,7 @@ const router = createBrowserRouter(
       <Route index element={<SelectProvider><SelectContent/></SelectProvider>}/>
       <Route path='play' element={<SelectProvider><GamePlay/></SelectProvider>}/>
 
-      <Route path='*' element={<NotFound/>}/>
+      <Route path="*" element={<NotFound/>}/>
     </Route>
   )
 );
