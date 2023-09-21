@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import logobonus from '../assets/images/logo-bonus.svg'
 import imagerules from '../assets/images/image-rules-bonus.svg'
 import iconclose from '../assets/images/icon-close.svg'
 import ScoreBoard from '../components/ScoreBoard'
+import NotFound from '../components/NotFound'
 
 export default function RootLayout() {
     const [isClicked, setIsClicked] = useState(false)
+    const [responseStatus, setResponseStatus] = useState(null);
+
+    useEffect(() => {
+        // Simulate a request to a non-existent endpoint (results in a 404 error)
+        fetch('/non-existent-endpoint')
+          .then((response) => {
+            setResponseStatus(response.status);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+        });
+    }, []);
 
     const handleClickOpen = (event) => {
         setIsClicked(true)
@@ -27,9 +40,15 @@ export default function RootLayout() {
                     </div>
                 </header>
 
-                <main className=' text-white flex justify-center'>
-                    <Outlet/>
-                </main>
+                {responseStatus === 404 ? (
+                    <NotFound/>
+                ) : (
+                    <main className=' text-white flex justify-center'>
+                        <Outlet/>
+                    </main>
+                )}
+
+                
 
                 <footer className=' flex justify-center text-white pb-20 font-Barlow '>
                     <button onClick={handleClickOpen} className=' border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg lg:absolute lg:bottom-0 lg:right-0 lg:mb-10 lg:mr-10'>RULES</button>
