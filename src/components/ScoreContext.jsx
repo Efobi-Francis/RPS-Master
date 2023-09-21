@@ -5,7 +5,10 @@ const ScoreContext = createContext();
 
 // Create a provider component to wrap your app
 export function ScoreProvider({ children }) {
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(() => {
+    const savedScore = localStorage.getItem('score');
+    return savedScore ? parseInt(savedScore, 10) : 0;
+  });
 
   // Define a function to update the score
   const updateScore = (result) => {

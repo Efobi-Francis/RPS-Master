@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useScore } from './ScoreContext';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useSelect } from './SelectContext';
+import { useNavigate } from 'react-router-dom';
 
 import Button from './buttons'
 import { BUTTON_TYPES } from '../commons/data/button';
@@ -11,10 +12,13 @@ export default function GamePlay() {
   // Use the useScore hook to access score and updateScore
   const { score, updateScore } = useScore();
 
+  // Use the useSelect hook to access userchoice from SelectContent component
+  const { choice } = useSelect();
+
   const [computerChoice, setComputerChoice] = useState(null)
   const [result, setResult] = useState(null);
 
-  const { userChoice } = useParams();
+  // const { userChoice } = useParams();
   const navigate = useNavigate()
 
   useEffect( function () {
@@ -44,22 +48,26 @@ export default function GamePlay() {
 
   useEffect(() => {
     // Calculate the winner once both choices are available
-    if (userChoice && computerChoice) {
+    if (choice && computerChoice) {
       const delayedResult = setTimeout(() => {
-        const result = determineWinner(userChoice, computerChoice);
+        const result = determineWinner(choice, computerChoice);
         setResult(result);
 
         // Use the updateScore function from the context to update the score
         if (result === 'YOU WIN') {
           updateScore('win');
+          localStorage.setItem('score', (score + 1).toString()); // Persist the score in localStorage
         } else if (result === 'YOU LOSE' && score > 0) {
           updateScore('lose');
+          localStorage.setItem('score', (score - 1).toString()); // Persist the score in localStorage
         }
+        
       }, 1000);
 
       return () => clearTimeout(delayedResult);
     }
-  }, [userChoice, computerChoice]);
+  }, [choice, computerChoice]);
+
 
   const playAgain = () => {
     navigate('/')
@@ -85,8 +93,8 @@ export default function GamePlay() {
             )}
             
             {/* dynamic content gets button chosen from select component using useParams*/}
-            <Button type={userChoice}
-              btnIcon={userChoice}
+            <Button type={choice}
+              btnIcon={choice}
               btnPosition_Size={`${btnPosition}`}
               imgbg_size={`${imgBgSize}`}
               imgSize={`${imgHeight}`}
