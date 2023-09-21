@@ -13,7 +13,7 @@ export default function RootLayout() {
 
     useEffect(() => {
         // Simulate a request to a non-existent endpoint (results in a 404 error)
-        fetch('/non-existent-endpoint')
+        fetch('/')
           .then((response) => {
             setResponseStatus(response.status);
           })

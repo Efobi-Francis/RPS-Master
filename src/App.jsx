@@ -6,7 +6,6 @@ import RootLayout from './layouts/RootLayout';
 
 import SelectContent from './components/SelectContent'
 import GamePlay from './components/GamePlay';
-import NotFound from './components/NotFound';
 import './App.css'
 
 
@@ -15,8 +14,6 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout/>}>
       <Route index element={<SelectProvider><SelectContent/></SelectProvider>}/>
       <Route path='play' element={<SelectProvider><GamePlay/></SelectProvider>}/>
-
-      <Route path="*" element={<NotFound/>}/>
     </Route>
   )
 );
