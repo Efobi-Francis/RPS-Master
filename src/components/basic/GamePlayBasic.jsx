@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useScore } from './ScoreContext';
-import { useSelect } from './SelectContext';
+import { useScore } from '../ScoreContext';
+import { useSelect } from '../SelectContext';
 import { useNavigate } from 'react-router-dom';
 
-import Button from './buttons'
-import { BUTTON_TYPES } from '../commons/data/button';
+import Button from '../buttons'
+import { BUTTON_TYPES } from '../../commons/data/button';
 
-const choices = [BUTTON_TYPES.SCISSORS, BUTTON_TYPES.PAPER, BUTTON_TYPES.ROCK, BUTTON_TYPES.LIZARD, BUTTON_TYPES.SPOCK]
+const choices = [BUTTON_TYPES.SCISSORS, BUTTON_TYPES.PAPER, BUTTON_TYPES.ROCK]
 
 export default function GamePlay() {
   // Use the useScore hook to access score and updateScore
@@ -34,11 +34,9 @@ export default function GamePlay() {
   const determineWinner = (userChoice, computerChoice) => {
     if (userChoice === computerChoice) return 'A DRAW!';
     if (
-      (userChoice === BUTTON_TYPES.ROCK && (computerChoice === BUTTON_TYPES.SCISSORS || computerChoice === BUTTON_TYPES.LIZARD)) ||
-      (userChoice === BUTTON_TYPES.PAPER && (computerChoice === BUTTON_TYPES.ROCK || computerChoice === BUTTON_TYPES.SPOCK)) ||
-      (userChoice === BUTTON_TYPES.SCISSORS && (computerChoice === BUTTON_TYPES.PAPER || computerChoice === BUTTON_TYPES.LIZARD)) ||
-      (userChoice === BUTTON_TYPES.LIZARD && (computerChoice === BUTTON_TYPES.SPOCK || computerChoice === BUTTON_TYPES.PAPER)) ||
-      (userChoice === BUTTON_TYPES.SPOCK && (computerChoice === BUTTON_TYPES.SCISSORS || computerChoice === BUTTON_TYPES.ROCK))
+      (userChoice === BUTTON_TYPES.ROCK && computerChoice === BUTTON_TYPES.SCISSORS) ||
+      (userChoice === BUTTON_TYPES.PAPER && computerChoice === BUTTON_TYPES.ROCK) ||
+      (userChoice === BUTTON_TYPES.SCISSORS && computerChoice === BUTTON_TYPES.PAPER)
     ) {
       return 'YOU WIN';
     } else {
@@ -108,7 +106,8 @@ export default function GamePlay() {
             <div>
               <h1 className='text-6xl mb-5 font-bold lg:text-5xl'>{result}</h1>
               <button onClick={playAgain} className='bg-white text-[hsl(229,25%,31%)] text-lg tracking-widest rounded-lg py-4 px-14'>PLAY AGAIN</button>
-            </div>) : (<div>Thinking...</div>)}
+            </div>) : (<div>Thinking...</div>
+          )}
         </div>
 
         <div className='flex flex-col items-center lg:flex-col-reverse'>
@@ -139,7 +138,8 @@ export default function GamePlay() {
           <div>
             <h1 className='text-6xl mb-5 font-bold'>{result}</h1>
             <button onClick={playAgain} className='bg-white text-[hsl(229,25%,31%)] text-lg tracking-widest rounded-lg py-4 px-20'>PLAY AGAIN</button>
-          </div>) : (<div>Thinking...</div>)}
+          </div>) : (<div>Thinking...</div>
+        )}
       </div>
     </div>
   )

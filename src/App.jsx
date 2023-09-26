@@ -1,30 +1,40 @@
 import { createBrowserRouter,createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
 import { ScoreProvider } from './components/ScoreContext'; // Import ScoreProvider
 import SelectProvider from './components/SelectContext';
+import { ToggleProvider } from './components/ToggleContext';
 
 import RootLayout from './layouts/RootLayout';
 
-import SelectContent from './components/SelectContent'
-import GamePlay from './components/GamePlay';
+import SelectContentBasic from './components/basic/SelectContentBasic';
+import GamePlayBasic from './components/basic/GamePlayBasic'
+import SelectContentBonus from './components/bonus/SelectContentBonus'
+import GamePlayBonus from './components/bonus/GamePlayBonus';
 import './App.css'
+
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout/>}>
-      <Route index element={<SelectProvider><SelectContent/></SelectProvider>}/>
-      <Route path='play' element={<SelectProvider><GamePlay/></SelectProvider>}/>
+      <Route index element={<SelectProvider><SelectContentBasic/></SelectProvider>}/>
+      <Route path='play' element={<SelectProvider><GamePlayBasic/></SelectProvider>}/>
+      <Route path=':mode' element={<SelectProvider><SelectContentBonus/></SelectProvider>}/>
+      <Route path=':mode/play' element={<SelectProvider><GamePlayBonus/></SelectProvider>}/>
     </Route>
   )
 );
 
+
 function App() {
+
   return (
-    <ScoreProvider>
+    <ToggleProvider>
+      <ScoreProvider>
       <div>
         <RouterProvider router={router}/>
       </div>
-    </ScoreProvider>
+      </ScoreProvider>
+    </ToggleProvider>
   )
 }
 

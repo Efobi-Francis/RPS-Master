@@ -5,3 +5,8 @@ export const BUTTON_TYPES = {
     LIZARD: 'LIZARD',
     SPOCK: 'SPOCK'
 }
+
+export const TOGGLE_TYPES = {
+    BASIC: 'BASIC',
+    BONUS: 'BONUS'
+}
