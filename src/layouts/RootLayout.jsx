@@ -46,7 +46,7 @@ export default function RootLayout() {
                 </main>
 
                 <footer className=' flex justify-center text-white pb-20 font-Barlow '>
-                    <button onClick={handleClickOpen} className=' border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg lg:absolute lg:bottom-0 lg:right-0 lg:mb-10 lg:mr-10'>RULES</button>
+                    <button onClick={handleClickOpen} className='relative bottom-10 border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg lg:absolute lg:bottom-0 lg:right-0 lg:mb-10 lg:mr-10'>RULES</button>
                     {isClicked && (
                         <>
                             <div className='lg:hidden flex flex-col items-center justify-between h-screen w-full absolute top-0 bg-white pb-24 z-30'>
