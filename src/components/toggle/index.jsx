@@ -15,6 +15,6 @@ export default function toggle(props) {
     }
 
   return (
-    <button onClick={toggleClick} className='absolute bottom-0 mb-5 whitespace-nowrap text-white font-Barlow border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg lg:mb-10 lg:left-0 lg:ml-10'>{`${getToggleText()}`}</button>
+    <button onClick={toggleClick} className='absolute bottom-0 mt-3 mb-2 whitespace-nowrap text-white font-Barlow border-2 border-white py-2 px-10 rounded-lg tracking-widest text-lg lg:mb-10 lg:left-0 lg:ml-10'>{`${getToggleText()}`}</button>
   )
 }
