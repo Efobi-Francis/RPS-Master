@@ -26,7 +26,7 @@ export default function SelectContentBasic() {
         setTimeout( ()=> {
             //delays the navigation and browser reload, so that the loader screen in the useEffect can show
             navigate(`/${TOGGLE_TYPES.BONUS.toLowerCase()}`)
-            // window.location.reload(false);
+            window.location.reload(false);
         }, 2000)
     };
 

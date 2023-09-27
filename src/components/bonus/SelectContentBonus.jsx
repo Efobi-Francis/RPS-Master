@@ -25,7 +25,7 @@ export default function SelectContent() {
     setTimeout( ()=> {
       //delays the navigation and browser reload, so that the loader screen in the useEffect can show
       navigate('/')
-      // window.location.reload(false);
+      window.location.reload(false);
     },2000)
   }
 
