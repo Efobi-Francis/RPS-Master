@@ -107,7 +107,7 @@ export default function GamePlay() {
           {result ? (
             <div>
               <h1 className='text-6xl mb-5 font-bold lg:text-5xl'>{result}</h1>
-              <button onClick={playAgain} className='bg-white text-[hsl(229,25%,31%)] text-lg tracking-widest rounded-lg py-4 px-14'>PLAY AGAIN</button>
+              <button onClick={playAgain} className='bg-white text-[hsl(229,25%,31%)] text-lg tracking-widest rounded-lg py-4 px-14 hover:text-red-500'>PLAY AGAIN</button>
             </div>) : (<div>Thinking...</div>)}
         </div>
 

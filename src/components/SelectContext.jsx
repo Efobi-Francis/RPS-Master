@@ -24,9 +24,6 @@ export default function SelectProvider({ children }) {
     }
   };
 
-  console.log(choice)
-
-
   return (
     <SelectContext.Provider value={{ choice, handleUserChoice }}>
       {children}

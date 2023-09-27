@@ -8,7 +8,6 @@ export function ToggleProvider({ children }) {
   
   const toggleMode = (mode) => {
     setCurrentMode(mode)
-    console.log(mode)
   };
 
   return (
